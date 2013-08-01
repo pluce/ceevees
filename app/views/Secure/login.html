@@ -1,0 +1,84 @@
+#{extends 'Secure/layout.html' /}
+
+<div class="row">
+    <div id="login" class="span6">
+        <h1>Déjà inscrit ?</h1>
+
+        #{form @authenticate(), class:"form-horizontal"}
+
+                #{if flash.error && !flash.errorRegister}
+                        <p class="alert alert-error">
+                                &{'secure.error'}
+                        </p>
+                #{/if}
+                #{if flash.success}
+                        <p class="alert alert-success">
+                                &{'secure.success'}
+                        </p>
+                #{/if}
+                <div class="control-group">
+                    <label class="control-label" for="username">&{'secure.username'}</label>
+                    <div class="controls">
+                        <input type="text" name="username" value="${flash.username}"/>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="password">&{'secure.password'}</label>
+                    <div class="controls">
+                        <input type="password" name="password" value=""/>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <label class="checkbox">
+                           <input type="checkbox" name="remember" id="remember" value="true" ${flash.remember ? 'checked="true"' : ''} />&{'secure.remember'}
+                        </label>
+                         <input type="submit" class="btn" value="&{'secure.signin'}" />
+                    </div>
+                </div>
+          
+        #{/form}
+    </div>
+    <div id="register" class="span6">
+        <h1>Nouveau venu ?</h1>
+
+        #{form @authenticate(), class:"form-horizontal"}
+
+                #{if flash.errorRegister}
+                        <p class="alert alert-error">
+                                &{flash.errorRegister}
+                        </p>
+                #{/if}
+                
+                <div class="control-group">
+                    <label class="control-label" for="username">&{'register.username'}</label>
+                    <div class="controls">
+                        <input type="text" name="username" value="${flash.username}"/>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="password">&{'register.password'}</label>
+                    <div class="controls">
+                        <input type="password" name="password" value=""/>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="passwordbis">&{'register.passwordbis'}</label>
+                    <div class="controls">
+                        <input type="password" name="passwordbis" value=""/>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="email">&{'register.email'}</label>
+                    <div class="controls">
+                        <input type="text" name="email" value="${flash.email}"/>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                         <input type="submit" class="btn" value="&{'register.register'}" />
+                    </div>
+                </div>
+        #{/form}
+    </div>
+</div>

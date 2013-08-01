@@ -13,7 +13,42 @@ public class Security extends Secure.Security {
         return Utilisateur.find("byLogin",connected()).first();
     }
     
+    
     static boolean authenticate(String username, String password) {
+        if(request.params.get("email") != null && request.params.get("passwordbis") != null){    
+            
+            if(request.params.get("username").length() == 0){
+                flash.put("errorRegister", "Un identifiant vide n'est pas une bonne idée.");
+                return false;
+            }   
+            if(Utilisateur.find("byLogin",username).fetch().size() > 0){
+                flash.put("errorRegister", "Cet identifiant est déjà utilisé, veuillez en changer.");
+                return false;
+            }   
+            if(Utilisateur.find("byEmail",request.params.get("email")).fetch().size() > 0){
+                flash.put("errorRegister", "Cet email est déjà utilisé, veuillez en changer.");
+                return false;
+            }               
+            if(request.params.get("passwordbis").length() == 0 || request.params.get("password").length() == 0 ){
+                flash.put("errorRegister", "Un mot de passe vide n'est pas une bonne idée.");
+                return false;
+            }
+            if(!request.params.get("passwordbis").equals(password)){
+                flash.put("errorRegister", "Les deux mots de passe ne correspondent pas.");
+                return false;
+            }
+            if(!validation.email(request.params.get("email")).ok){
+                flash.put("errorRegister", "L'email n'est pas correct");
+                return false;
+            }
+            Utilisateur util = new Utilisateur();
+            util.login = username;
+            util.password = password;
+            util.email = request.params.get("email");
+            util.save();
+            return true;
+        }
+        
         Utilisateur u = Utilisateur.find("byLoginAndPassword",username,password).first();
         if(u == null){
             return false;

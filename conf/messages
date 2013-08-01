@@ -1,3 +1,16 @@
 # You can specialize this file for each language.
 # For example, for French create a messages.fr file
 #
+secure.error=Echec de la connexion !<br/>Vérifiez vos login et mot de passe, ou inscrivez-vous.
+secure.success=Vous êtes maintenant déconnecté.
+
+secure.username=Entrez votre login:
+secure.password=Entrez votre mot de passe:
+secure.remember=Se souvenir de moi
+secure.signin=Connexion
+
+register.username=Entrez un login:
+register.password=Entrez un mot de passe:
+register.passwordbis=Répétez le mot de passe:
+register.register=Enregistrement !
+register.email=Entrez un email valide:

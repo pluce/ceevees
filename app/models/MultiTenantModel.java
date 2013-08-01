@@ -8,7 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import org.hibernate.annotations.Filter;
+import org.hibernate.annotations.FilterDef;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.ParamDef;
 import play.db.jpa.GenericModel;
 
 /**
@@ -16,6 +18,11 @@ import play.db.jpa.GenericModel;
  * @author Pluce
  */
 @MappedSuperclass
+@FilterDef(
+    name="tenant",
+    parameters={
+        @ParamDef( name="tenantId", type="string") },
+        defaultCondition=":tenantId = tenantId")
 @Filter(name="tenant")
 public class MultiTenantModel extends AbstractModel {
     

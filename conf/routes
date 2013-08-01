@@ -21,6 +21,8 @@ DELETE      /offres/{id}                            OffreRessource.delete
 GET         /offres/{idOffre}/etapes                EtapeOffreRessource.get
 POST        /offres/{idOffre}/etapes                EtapeOffreRessource.post
 
+POST         /register                              Register.register
+
 *       /                                       module:secure
 
 # Catch all
