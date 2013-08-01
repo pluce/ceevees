@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="ceevees">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html>
+    <head>
+        <title>#{get 'title' /}</title>
+        <meta charset="${_response_encoding}">
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/bootstrap.min.css'}">
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+        #{get 'moreStyles' /}
+        <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
+       
+        <script src="@{'/public/javascripts/jquery.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+        <script src="@{'/public/javascripts/bootstrap.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+        <script src="@{'/public/javascripts/angular.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+        <script src="@{'/public/javascripts/angular-resource.min.js'}"type="text/javascript" charset="${_response_encoding}"></script>
+        
+        <script src="@{'/public/javascripts/app/app.js'}"type="text/javascript" charset="${_response_encoding}"></script>
+        
+        <script src="@{'/public/javascripts/app/ctrl/HomeCtrl.js'}"type="text/javascript" charset="${_response_encoding}"></script>
+        
+        <script src="@{'/public/javascripts/app/services/Offres.js'}"type="text/javascript" charset="${_response_encoding}"></script> 
+        <script src="@{'/public/javascripts/app/services/EtapesOffre.js'}"type="text/javascript" charset="${_response_encoding}"></script> 
+        
+        #{get 'moreScripts' /}
+    </head>
+    <body>
+        <div class="container">
+            <div class="navbar navbar-static-top navbar-inverse">
+                <div class="navbar-inner">
+                    <a class="brand" ng-href="#/">Ceevees</a>
+                    <div class="form-logout pull-right">
+                        <label>Connecter en tant que ${user}</label>
+                        <a class="btn btn-mini btn-primary" href="/logout">Se déconnecter</a>
+                    </div>
+                  </div>
+            </div>
+        
+            #{doLayout /}
+        
+        </div>
+    </body>
+</html>
