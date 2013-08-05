@@ -15,4 +15,5 @@ public class Utilisateur extends AbstractModel {
     public String login;
     public String password;
     public String email;
+    public boolean isAdmin = false;
 }

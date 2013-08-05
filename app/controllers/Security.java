@@ -1,6 +1,7 @@
 package controllers;
 
 import models.Utilisateur;
+import play.libs.Codec;
 
 
 /**
@@ -43,13 +44,13 @@ public class Security extends Secure.Security {
             }
             Utilisateur util = new Utilisateur();
             util.login = username;
-            util.password = password;
+            util.password = Codec.hexSHA1(password);
             util.email = request.params.get("email");
             util.save();
             return true;
         }
         
-        Utilisateur u = Utilisateur.find("byLoginAndPassword",username,password).first();
+        Utilisateur u = Utilisateur.find("byLoginAndPassword",username,Codec.hexSHA1(password)).first();
         if(u == null){
             return false;
         }
@@ -57,6 +58,9 @@ public class Security extends Secure.Security {
     }
     
     static boolean check(String profile) {
+        if(profile.equals("admin")){
+            return connectedTenant().isAdmin;
+        }
         return isConnected();
     }
 }

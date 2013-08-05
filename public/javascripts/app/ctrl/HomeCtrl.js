@@ -10,6 +10,12 @@ function HomeCtrl($scope,Offres,EtapesOffre){
        )
    }
    
+   $scope.deleteAnnonce = function(offre){
+       Offres.delete({"id":offre.id},function(){
+           $scope.offres = Offres.query();
+       });
+   }
+   
    $scope.annonce = {};
    
    $scope.enregistrerAnnonce = function(){

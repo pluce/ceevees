@@ -11,6 +11,13 @@ GET     /favicon.ico                            404
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public
 
+# Secret admin command
+GET     /reinit                                     SpecialAdmin.reinit
+
+
+GET     /admin/offres                               AdminOffres.getAll
+
+# API REST
 GET         /offres                                OffreRessource.get
 GET         /offres/{id}                            OffreRessource.getId
 POST        /offres                                 OffreRessource.post
@@ -21,9 +28,13 @@ DELETE      /offres/{id}                            OffreRessource.delete
 GET         /offres/{idOffre}/etapes                EtapeOffreRessource.get
 POST        /offres/{idOffre}/etapes                EtapeOffreRessource.post
 
-POST         /register                              Register.register
+
+# FIN API REST
+
 
 *       /                                       module:secure
+
+
 
 # Catch all
 *       /{controller}/{action}                  {controller}.{action}
