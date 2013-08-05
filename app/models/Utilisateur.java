@@ -4,6 +4,7 @@
  */
 package models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 /**
@@ -15,5 +16,7 @@ public class Utilisateur extends AbstractModel {
     public String login;
     public String password;
     public String email;
-    public boolean isAdmin = false;
+    
+    
+    public Boolean isAdmin = false;
 }
