@@ -46,6 +46,7 @@ public class Security extends Secure.Security {
             util.login = username;
             util.password = Codec.hexSHA1(password);
             util.email = request.params.get("email");
+            util.isAdmin = false;
             util.save();
             return true;
         }
@@ -59,7 +60,12 @@ public class Security extends Secure.Security {
     
     static boolean check(String profile) {
         if(profile.equals("admin")){
-            return connectedTenant().isAdmin;
+            Utilisateur u = connectedTenant();
+            if(u.isAdmin == null || u.isAdmin.equals(false)){
+                return false;
+            } else {
+                return true;
+            }
         }
         return isConnected();
     }
