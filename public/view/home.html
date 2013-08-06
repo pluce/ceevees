@@ -8,8 +8,9 @@
         <button type="submit" ng-click="enregistrerAnnonce()"class="btn">Ajouter l'annonce</button>
       </form>
 </div>
-
-    <div ng-repeat="(i,o) in offres" class="offre {{getAlertClasse(o)}} {{getColClasse(i,3)}}" >
+<div class="offre-wrapper left">
+    <div class="empty-offre"></div>
+    <div ng-repeat="(i,o) in offres | orderBy: orderAnnonceByState | filter: filterForColumnLeft" class="offre {{getAlertClasse(o)}}" >
             <div class="state-label">{{getStateLabel(o)}}</div>
             <p class="precisions"><b>{{o.entreprise}}</b><br/>à <b>{{o.ville}}</b></p>
             <h4>{{o.libelle}}</h4>
@@ -42,3 +43,79 @@
               </div>
             </div>
     </div>
+</div>
+
+<div class="offre-wrapper middle">
+    <div class="empty-offre"></div>
+    <div ng-repeat="(i,o) in offres | orderBy: orderAnnonceByState | filter: filterForColumnMiddle" class="offre {{getAlertClasse(o)}}" >
+            <div class="state-label">{{getStateLabel(o)}}</div>
+            <p class="precisions"><b>{{o.entreprise}}</b><br/>à <b>{{o.ville}}</b></p>
+            <h4>{{o.libelle}}</h4>
+            <a ng-show="o.url.length > 0" target="_blank" href="{{o.url}}">Voir l'annonce</a>
+            <a ng-hide="o.url.length > 0" target="_blank" href="javascript:void(0);"></a>
+            <a ng-show="o.email.length > 0" href="mailto:{{o.email}}">Envoyer un e-mail</a> 
+            <a ng-hide="o.email.length > 0" ref="javascript:void(0);"></a>
+            <div class="actions btn-toolbar">
+              <div class="btn-group">
+                <button class="btn btn-{{getAlertClasse(o)}}" ng-click="changeState(o,'CONTACT_PRIS')" ng-show="o.etat == 'TROUVE'">Envoyer CV/Lettre</button>
+                <button class="btn btn-{{getAlertClasse(o)}}" ng-click="changeState(o,'TROUVE')" ng-show="o.etat == 'REJETE'">Remettre dans la pile</button>
+                <button class="btn btn-{{getAlertClasse(o)}}" ng-click="changeState(o,'ENTRETIENS_EN_COURS')" ng-show="o.etat == 'CONTACT_PRIS'">Programmer un entretien</button>
+                <button class="btn btn-{{getAlertClasse(o)}}" ng-click="changeState(o,'ENTRETIENS_EN_COURS')" ng-show="o.etat == 'REPONSE_POSITIVE'">Programmer un entretien</button>
+                <button class="btn btn-{{getAlertClasse(o)}}" ng-click="changeState(o,'CONTACT_PRIS')" ng-show="o.etat == 'REPONSE_NEGATIVE'">Relancer</button>
+                <button class="btn btn-{{getAlertClasse(o)}}" ng-click="changeState(o,'RECRUTEMENT_EN_COURS')" ng-show="o.etat == 'ENTRETIENS_EN_COURS'">Débuter recrutement</button>
+                <button class="btn btn-{{getAlertClasse(o)}}" ng-click="changeState(o,'REPONSE_NEGATIVE')" ng-show="o.etat == 'RECRUTEMENT_EN_COURS'">Annuler recrutement</button>
+                <button class="btn btn-{{getAlertClasse(o)}} dropdown-toggle" data-toggle="dropdown">
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="javascript:void(0);" ng-click="changeState(o,'REJETE')">Mettre de côté</a></li>
+                    <li><a href="javascript:void(0);" ng-click="changeState(o,'TROUVE')">Remettre dans la pile</a></li>
+                    <li><a href="javascript:void(0);" ng-click="changeState(o,'CONTACT_PRIS')">Envoyer CV/Lettre</a></li>
+                    <li><a href="javascript:void(0);" ng-click="changeState(o,'REPONSE_POSITIVE')">Réponse positive</a></li>
+                    <li><a href="javascript:void(0);" ng-click="changeState(o,'REPONSE_NEGATIVE')">Réponse négative</a></li>
+                    <li><a href="javascript:void(0);" ng-click="changeState(o,'ENTRETIENS_EN_COURS')">Programmer un entretien</a></li>
+                    <li><a href="javascript:void(0);" ng-click="changeState(o,'RECRUTEMENT_EN_COURS')">Débuter recrutement</a></li>
+                    <li><a href="javascript:void(0);" class="btn-danger" ng-click="deleteAnnonce(o)">Supprimer l'annonce</a></li>
+                </ul>
+              </div>
+            </div>
+    </div>
+</div>
+
+
+<div class="offre-wrapper right">
+    <div class="empty-offre"></div>
+    <div ng-repeat="(i,o) in offres | orderBy: orderAnnonceByState | filter: filterForColumnRight" class="offre {{getAlertClasse(o)}}" >
+            <div class="state-label">{{getStateLabel(o)}}</div>
+            <p class="precisions"><b>{{o.entreprise}}</b><br/>à <b>{{o.ville}}</b></p>
+            <h4>{{o.libelle}}</h4>
+            <a ng-show="o.url.length > 0" target="_blank" href="{{o.url}}">Voir l'annonce</a>
+            <a ng-hide="o.url.length > 0" target="_blank" href="javascript:void(0);"></a>
+            <a ng-show="o.email.length > 0" href="mailto:{{o.email}}">Envoyer un e-mail</a> 
+            <a ng-hide="o.email.length > 0" ref="javascript:void(0);"></a>
+            <div class="actions btn-toolbar">
+              <div class="btn-group">
+                <button class="btn btn-{{getAlertClasse(o)}}" ng-click="changeState(o,'CONTACT_PRIS')" ng-show="o.etat == 'TROUVE'">Envoyer CV/Lettre</button>
+                <button class="btn btn-{{getAlertClasse(o)}}" ng-click="changeState(o,'TROUVE')" ng-show="o.etat == 'REJETE'">Remettre dans la pile</button>
+                <button class="btn btn-{{getAlertClasse(o)}}" ng-click="changeState(o,'ENTRETIENS_EN_COURS')" ng-show="o.etat == 'CONTACT_PRIS'">Programmer un entretien</button>
+                <button class="btn btn-{{getAlertClasse(o)}}" ng-click="changeState(o,'ENTRETIENS_EN_COURS')" ng-show="o.etat == 'REPONSE_POSITIVE'">Programmer un entretien</button>
+                <button class="btn btn-{{getAlertClasse(o)}}" ng-click="changeState(o,'CONTACT_PRIS')" ng-show="o.etat == 'REPONSE_NEGATIVE'">Relancer</button>
+                <button class="btn btn-{{getAlertClasse(o)}}" ng-click="changeState(o,'RECRUTEMENT_EN_COURS')" ng-show="o.etat == 'ENTRETIENS_EN_COURS'">Débuter recrutement</button>
+                <button class="btn btn-{{getAlertClasse(o)}}" ng-click="changeState(o,'REPONSE_NEGATIVE')" ng-show="o.etat == 'RECRUTEMENT_EN_COURS'">Annuler recrutement</button>
+                <button class="btn btn-{{getAlertClasse(o)}} dropdown-toggle" data-toggle="dropdown">
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="javascript:void(0);" ng-click="changeState(o,'REJETE')">Mettre de côté</a></li>
+                    <li><a href="javascript:void(0);" ng-click="changeState(o,'TROUVE')">Remettre dans la pile</a></li>
+                    <li><a href="javascript:void(0);" ng-click="changeState(o,'CONTACT_PRIS')">Envoyer CV/Lettre</a></li>
+                    <li><a href="javascript:void(0);" ng-click="changeState(o,'REPONSE_POSITIVE')">Réponse positive</a></li>
+                    <li><a href="javascript:void(0);" ng-click="changeState(o,'REPONSE_NEGATIVE')">Réponse négative</a></li>
+                    <li><a href="javascript:void(0);" ng-click="changeState(o,'ENTRETIENS_EN_COURS')">Programmer un entretien</a></li>
+                    <li><a href="javascript:void(0);" ng-click="changeState(o,'RECRUTEMENT_EN_COURS')">Débuter recrutement</a></li>
+                    <li><a href="javascript:void(0);" class="btn-danger" ng-click="deleteAnnonce(o)">Supprimer l'annonce</a></li>
+                </ul>
+              </div>
+            </div>
+    </div>
+</div>

@@ -1,5 +1,6 @@
 package controllers;
 
+import java.util.Date;
 import models.Utilisateur;
 import play.libs.Codec;
 
@@ -47,6 +48,7 @@ public class Security extends Secure.Security {
             util.password = Codec.hexSHA1(password);
             util.email = request.params.get("email");
             util.isAdmin = false;
+            util.dateAjout = new Date();
             util.save();
             return true;
         }

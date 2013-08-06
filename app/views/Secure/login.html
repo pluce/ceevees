@@ -40,45 +40,48 @@
         #{/form}
     </div>
     <div id="register" class="span6">
-        <h1>Nouveau venu ?</h1>
+        <div class="well well-small">
+            
+            <h1>Nouveau venu ?</h1>
 
-        #{form @authenticate(), class:"form-horizontal"}
+            #{form @authenticate(), class:"form-horizontal"}
 
-                #{if flash.errorRegister}
-                        <p class="alert alert-error">
-                                &{flash.errorRegister}
-                        </p>
-                #{/if}
-                
-                <div class="control-group">
-                    <label class="control-label" for="username">&{'register.username'}</label>
-                    <div class="controls">
-                        <input type="text" name="username" value="${flash.username}"/>
+                    #{if flash.errorRegister}
+                            <p class="alert alert-error">
+                                    &{flash.errorRegister}
+                            </p>
+                    #{/if}
+
+                    <div class="control-group">
+                        <label class="control-label" for="username">&{'register.username'}</label>
+                        <div class="controls">
+                            <input type="text" name="username" value="${flash.username}"/>
+                        </div>
                     </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label" for="password">&{'register.password'}</label>
-                    <div class="controls">
-                        <input type="password" name="password" value=""/>
+                    <div class="control-group">
+                        <label class="control-label" for="password">&{'register.password'}</label>
+                        <div class="controls">
+                            <input type="password" name="password" value=""/>
+                        </div>
                     </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label" for="passwordbis">&{'register.passwordbis'}</label>
-                    <div class="controls">
-                        <input type="password" name="passwordbis" value=""/>
+                    <div class="control-group">
+                        <label class="control-label" for="passwordbis">&{'register.passwordbis'}</label>
+                        <div class="controls">
+                            <input type="password" name="passwordbis" value=""/>
+                        </div>
                     </div>
-                </div>
-                <div class="control-group">
-                    <label class="control-label" for="email">&{'register.email'}</label>
-                    <div class="controls">
-                        <input type="text" name="email" value="${flash.email}"/>
+                    <div class="control-group">
+                        <label class="control-label" for="email">&{'register.email'}</label>
+                        <div class="controls">
+                            <input type="text" name="email" value="${flash.email}"/>
+                        </div>
                     </div>
-                </div>
-                <div class="control-group">
-                    <div class="controls">
-                         <input type="submit" class="btn" value="&{'register.register'}" />
+                    <div class="control-group">
+                        <div class="controls">
+                             <input type="submit" class="btn" value="&{'register.register'}" />
+                        </div>
                     </div>
-                </div>
-        #{/form}
+            #{/form}
+        </div>
     </div>
 </div>

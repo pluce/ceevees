@@ -18,6 +18,27 @@ function HomeCtrl($scope,Offres,EtapesOffre){
    
    $scope.annonce = {};
    
+   $scope.orderAnnonceByState = function(offre){
+        if(offre.etat == "TROUVE") return 1;
+        if(offre.etat == "REJETE") return 6;
+        if(offre.etat == "CONTACT_PRIS") return 2;
+        if(offre.etat == "REPONSE_NEGATIVE") return 7;
+        if(offre.etat == "REPONSE_POSITIVE") return 4;
+        if(offre.etat == "ENTRETIENS_EN_COURS") return 3;
+        if(offre.etat == "RECRUTEMENT_EN_COURS") return 5;
+        return 0;
+   }
+   
+   $scope.filterForColumnLeft = function(o){
+       if(o.etat == 'TROUVE' || o.etat == 'REJETE' || o.etat == 'REPONSE_NEGATIVE') return true;
+   }
+   $scope.filterForColumnMiddle = function(o){
+       if(o.etat == 'CONTACT_PRIS' || o.etat == 'REPONSE_POSITIVE') return true;
+   }
+   $scope.filterForColumnRight = function(o){
+       if(o.etat == 'ENTRETIENS_EN_COURS' || o.etat == 'RECRUTEMENT_EN_COURS') return true;
+   }
+   
    $scope.enregistrerAnnonce = function(){
        $scope.annonce.etat = "TROUVE";
        Offres.save($scope.annonce,function(data){

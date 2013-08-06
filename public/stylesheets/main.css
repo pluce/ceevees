@@ -95,13 +95,25 @@ body {
     color: #b94a48;
 }
 
-
-.offre.left {
+.offre-wrapper {
+    width: 300px;
+    float: left;
+}
+.empty-offre {
+    width: 300px;
+    float: left;
+    height: 1px;
+}
+.offre-wrapper.middle {
+    margin: 0px;
+}
+.offre-wrapper.left {
     margin-right: 20px;
 }
-.offre.right {
+.offre-wrapper.right {
     margin-left: 20px;
 }
+
 
 .offre > a {
     display: block;

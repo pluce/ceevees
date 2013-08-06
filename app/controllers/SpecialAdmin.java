@@ -18,7 +18,9 @@ public class SpecialAdmin extends Controller {
         admin.password = Codec.hexSHA1("admin");
         admin.isAdmin = true;
         admin.email = "contact@pluce.net";
+        admin.dateAjout = new Date();
         admin.save();
+        
     }
 
 }
