@@ -18,8 +18,10 @@ public class LettreRessource extends TenantedController{
     
     public static void getLettre(String idOffre){
         Offre offre = Offre.findById(idOffre);
+        if(offre == null) notFound();
         Utilisateur utilisateur = Security.connectedTenant();
-        List<String> paragraphes = Arrays.asList(offre.lettre.split("\n"));
+        List<String> paragraphes = null;
+        if(offre.lettre != null) paragraphes = Arrays.asList(offre.lettre.split("\n"));
         PDF.renderPDF(offre,utilisateur,paragraphes);
     }
     
