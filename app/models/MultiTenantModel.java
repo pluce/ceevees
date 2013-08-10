@@ -7,11 +7,14 @@ package models;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
 import org.hibernate.annotations.Filter;
 import org.hibernate.annotations.FilterDef;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.ParamDef;
 import play.db.jpa.GenericModel;
+import play.db.jpa.JPABase;
 
 /**
  *
@@ -31,7 +34,6 @@ public class MultiTenantModel extends AbstractModel {
     public void setTenantId(String tenantId) {
         this.tenantId = tenantId;
     }
-    
     /**
      * Return true if the entity is owned by given tenant id
      * @param id
@@ -39,5 +41,17 @@ public class MultiTenantModel extends AbstractModel {
      */
     public boolean isOwnedBy(String id){
         return id.equals(tenantId);
+    }
+    
+    
+    public static <T extends MultiTenantModel> T loadById(String id,Class clazz) {
+        try {
+            TypedQuery<T> tq = em().createQuery("select e from "+clazz.getSimpleName()+" e where e.id=:id", clazz);
+            tq.setParameter("id", id);
+            T res =  tq.getSingleResult();
+            return res;
+        } catch (NoResultException nre){
+            return null;
+        }
     }
 }

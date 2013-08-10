@@ -21,11 +21,15 @@
         <script src="@{'/public/javascripts/app/ctrl/HomeCtrl.js'}"type="text/javascript" charset="${_response_encoding}"></script>
         <script src="@{'/public/javascripts/app/ctrl/CompteCtrl.js'}"type="text/javascript" charset="${_response_encoding}"></script>
         <script src="@{'/public/javascripts/app/ctrl/DetailsOffreCtrl.js'}"type="text/javascript" charset="${_response_encoding}"></script>
+        <script src="@{'/public/javascripts/app/ctrl/ToasterCtrl.js'}"type="text/javascript" charset="${_response_encoding}"></script>
         
         <script src="@{'/public/javascripts/app/services/Offres.js'}"type="text/javascript" charset="${_response_encoding}"></script> 
         <script src="@{'/public/javascripts/app/services/EtapesOffre.js'}"type="text/javascript" charset="${_response_encoding}"></script> 
         <script src="@{'/public/javascripts/app/services/UtilisateurDetails.js'}"type="text/javascript" charset="${_response_encoding}"></script> 
         <script src="@{'/public/javascripts/app/services/OffresContact.js'}"type="text/javascript" charset="${_response_encoding}"></script> 
+        <script src="@{'/public/javascripts/app/services/Toaster.js'}"type="text/javascript" charset="${_response_encoding}"></script> 
+        
+        <script src="@{'/public/javascripts/app/directives/falling.js'}"type="text/javascript" charset="${_response_encoding}"></script> 
         
         #{get 'moreScripts' /}
     </head>
@@ -48,5 +52,26 @@
             #{doLayout /}
         
         </div>
+         <div class="toastContainer" ng-controller="ToasterCtrl">
+                <div class="alert alert-{{msg.type}}" ng-repeat="msg in toasts | orderBy:'id':true" falling="1000">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <span ng-bind-html-unsafe="msg.message"></span>
+                </div>
+            </div>
+            <style>
+                
+                .toastContainer{
+                    position: fixed;
+                    right: 20px;
+                    bottom: 0px;
+                    width: 200px;
+                    font-size: 12px;
+                }
+                
+                .toastContainer .alert {
+                    float: right;
+                    width: 200px;
+                }     
+            </style>
     </body>
 </html>

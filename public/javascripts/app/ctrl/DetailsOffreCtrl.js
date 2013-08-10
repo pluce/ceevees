@@ -1,6 +1,8 @@
-function DetailsOffreCtrl($scope,$location,$routeParams,Offres,EtapesOffre,OffresContact){
+function DetailsOffreCtrl($scope,$location,$routeParams,Offres,EtapesOffre,OffresContact,Toaster){
     $scope.idOffre = $routeParams.idOffre;
-    $scope.offre = Offres.get({id: $scope.idOffre});
+    $scope.offre = Offres.get({id: $scope.idOffre},function(){},function(){
+        $location.path("/404");
+    });
    $scope.changeState = function(newState){
        EtapesOffre.save(
         {"offreId":$scope.idOffre,"newState":newState},
@@ -19,23 +21,27 @@ function DetailsOffreCtrl($scope,$location,$routeParams,Offres,EtapesOffre,Offre
    $scope.saveLettre = function(){
        Offres.update($scope.offre,function(){
           $scope.justSaved = true;
+          Toaster.success("Lettre sauvegardée.");
        },function(){
-           //nok
+          Toaster.error("La lettre n'a pas été sauvegardée.");
        });
    }
    
    $scope.deleteAnnonce = function(){
        Offres.delete({"id":$scope.idOffre},function(){
+           Toaster.success("Annonce supprimée.");
            $location.path("/");
+       },function(){
+           Toaster.error("L'annonce n'a pas été supprimée.");
        });
    }
    
    $scope.saveContact = function(){
        $scope.offre.contact.offreId = $scope.offre.id;
        OffresContact.save($scope.offre.contact,function(){
-           //ok
+          Toaster.success("Contact sauvegardé.");
        },function(){
-           //nok
+          Toaster.error("Le contact n'a pas pu être sauvegardé.");
        });
    }
    

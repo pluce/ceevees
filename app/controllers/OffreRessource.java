@@ -18,7 +18,7 @@ public class OffreRessource extends TenantedController{
     }
     
     public static void getId(String id){
-        Offre o = Offre.findById(id);
+        Offre o = Offre.loadById(id,Offre.class);
         if(o == null) notFound();
         
         renderJSON(o);
@@ -39,7 +39,7 @@ public class OffreRessource extends TenantedController{
     
     public static void put(String id){
         try {
-            Offre o = Offre.findById(id);
+            Offre o = Offre.loadById(id,Offre.class);
             if(o == null) notFound();
             o = getObjectFromRequestBody(Offre.class);
             o.id = id;
@@ -56,7 +56,7 @@ public class OffreRessource extends TenantedController{
     
     public static void delete(String id){
         try {
-            Offre o = Offre.findById(id);
+            Offre o = Offre.loadById(id,Offre.class);
             if(o == null) notFound();
             o.delete();
             renderJSON(true);
@@ -67,14 +67,14 @@ public class OffreRessource extends TenantedController{
     }
     
     public static void getContact(String idOffre){
-        Offre o = Offre.findById(idOffre);
+        Offre o = Offre.loadById(idOffre,Offre.class);
         if(o == null) notFound();
         renderJSON(o.contact);
     }
     
     public static void postContact(String idOffre){
         Contact c = getObjectFromRequestBody(Contact.class);
-        Offre o = Offre.findById(idOffre);
+        Offre o = Offre.loadById(idOffre,Offre.class);
         if(o == null) notFound();
         o.contact = c.merge();
         o.contact.validateAndSave();

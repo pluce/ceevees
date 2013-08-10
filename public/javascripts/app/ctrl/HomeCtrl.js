@@ -1,4 +1,4 @@
-function HomeCtrl($scope,Offres,EtapesOffre){
+function HomeCtrl($scope,Offres,EtapesOffre,Toaster){
     $scope.offres = Offres.query();
    //  ng-class="{'alert-info':o.etat == 'TROUVE','alert-danger':o.etat == 'REJETE'}"
    $scope.changeState = function(offre,newState){
@@ -13,6 +13,9 @@ function HomeCtrl($scope,Offres,EtapesOffre){
    $scope.deleteAnnonce = function(offre){
        Offres.delete({"id":offre.id},function(){
            $scope.offres = Offres.query();
+           Toaster.success("Annonce supprimée.");
+       },function(){
+           Toaster.error("L'annonce n'a pas été supprimée.");
        });
    }
    
@@ -44,6 +47,9 @@ function HomeCtrl($scope,Offres,EtapesOffre){
        Offres.save($scope.annonce,function(data){
            $scope.offres.push(data);
            $scope.annonce = {};
+           Toaster.success("Annonce enregistrée.");
+       },function(){
+           Toaster.error("L'annonce n'a pas été enregistrée");
        });
    }
    

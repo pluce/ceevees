@@ -16,7 +16,7 @@ import java.util.Date;
 public class EtapeOffreRessource extends TenantedController {
     
     private static Offre getOffre(String idOffre){
-        return (Offre)Offre.findById(idOffre);
+        return (Offre)Offre.loadById(idOffre,Offre.class);
     }
     
     public static void get(String idOffre){

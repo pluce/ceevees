@@ -17,12 +17,15 @@ import play.modules.pdf.PDF;
 public class LettreRessource extends TenantedController{
     
     public static void getLettre(String idOffre){
-        Offre offre = Offre.findById(idOffre);
+        Offre offre = Offre.loadById(idOffre,Offre.class);
         if(offre == null) notFound();
         Utilisateur utilisateur = Security.connectedTenant();
         List<String> paragraphes = null;
         if(offre.lettre != null) paragraphes = Arrays.asList(offre.lettre.split("\n"));
-        PDF.renderPDF(offre,utilisateur,paragraphes);
+        PDF.Options op = new PDF.Options();
+        op.filename = "Lettre_Motivation_"+utilisateur.details.prenom+"_"+utilisateur.details.nom;
+        
+        PDF.renderPDF(op,offre,utilisateur,paragraphes);
     }
     
 }
