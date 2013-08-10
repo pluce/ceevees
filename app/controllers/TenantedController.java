@@ -4,9 +4,12 @@
  */
 package controllers;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import models.TenantProvider;
 import org.hibernate.Session;
 import play.db.jpa.JPA;
+import play.libs.IO;
 import play.mvc.Before;
 import play.mvc.Controller;
 import play.mvc.With;
@@ -28,4 +31,13 @@ public class TenantedController extends Controller {
             forbidden();
         }
     }
+    
+    
+    public static <T> T getObjectFromRequestBody(Class<T> clazz){
+        String body = IO.readContentAsString(request.body);
+        Gson gson = new GsonBuilder()./*setDateFormat("yyyy-MM-dd'T'HH:mm:ss").*/create();
+        T o = gson.<T>fromJson(body,clazz);
+        return o;
+    }
+    
 }

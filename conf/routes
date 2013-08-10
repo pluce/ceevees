@@ -28,6 +28,16 @@ DELETE      /offres/{id}                            OffreRessource.delete
 GET         /offres/{idOffre}/etapes                EtapeOffreRessource.get
 POST        /offres/{idOffre}/etapes                EtapeOffreRessource.post
 
+GET         /offres/{idOffre}/contact                OffreRessource.getContact
+POST        /offres/{idOffre}/contact                OffreRessource.postContact
+
+
+GET         /offres/{idOffre}/lettre                LettreRessource.getLettre
+
+
+GET         /utilisateur/details                    UtilisateurRessource.details
+POST        /utilisateur/details                    UTilisateurRessource.postDetails
+
 
 # FIN API REST
 

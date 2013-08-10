@@ -1,0 +1,104 @@
+<div class="container row">
+    <div class="offre {{getAlertClasse(offre)}}">
+            <div class="state-label">{{getStateLabel(offre)}}</div>
+            <p class="precisions"><b>{{offre.entreprise}}</b><br/>à <b>{{offre.ville}}</b></p>
+            <h4>{{offre.libelle}}</h4>
+            <a ng-show="offre.url.length > 0" target="_blank" href="{{offre.url}}">Voir l'annonce</a>
+            <a ng-hide="offre.url.length > 0" target="_blank" href="javascript:void(0);"></a>
+            <a ng-show="offre.email.length > 0" href="mailto:{{offre.email}}">Envoyer un e-mail</a> 
+            <a ng-hide="offre.email.length > 0" ref="javascript:void(0);"></a>
+            <div class="actions btn-toolbar">
+              <div class="btn-group">
+                <button class="btn btn-{{getAlertClasse(offre)}}" ng-click="changeState('CONTACT_PRIS')" ng-show="offre.etat == 'TROUVE'">Envoyer CV/Lettre</button>
+                <button class="btn btn-{{getAlertClasse(offre)}}" ng-click="changeState('TROUVE')" ng-show="offre.etat == 'REJETE'">Remettre dans la pile</button>
+                <button class="btn btn-{{getAlertClasse(offre)}}" ng-click="changeState('ENTRETIENS_EN_COURS')" ng-show="offre.etat == 'CONTACT_PRIS'">Programmer un entretien</button>
+                <button class="btn btn-{{getAlertClasse(offre)}}" ng-click="changeState('ENTRETIENS_EN_COURS')" ng-show="offre.etat == 'REPONSE_POSITIVE'">Programmer un entretien</button>
+                <button class="btn btn-{{getAlertClasse(offre)}}" ng-click="changeState('CONTACT_PRIS')" ng-show="offre.etat == 'REPONSE_NEGATIVE'">Relancer</button>
+                <button class="btn btn-{{getAlertClasse(offre)}}" ng-click="changeState('RECRUTEMENT_EN_COURS')" ng-show="offre.etat == 'ENTRETIENS_EN_COURS'">Débuter recrutement</button>
+                <button class="btn btn-{{getAlertClasse(offre)}}" ng-click="changeState('REPONSE_NEGATIVE')" ng-show="offre.etat == 'RECRUTEMENT_EN_COURS'">Annuler recrutement</button>
+                <button class="btn btn-{{getAlertClasse(offre)}} dropdown-toggle" data-toggle="dropdown">
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="javascript:void(0);" ng-click="changeState('REJETE')">Mettre de côté</a></li>
+                    <li><a href="javascript:void(0);" ng-click="changeState('TROUVE')">Remettre dans la pile</a></li>
+                    <li><a href="javascript:void(0);" ng-click="changeState('CONTACT_PRIS')">Envoyer CV/Lettre</a></li>
+                    <li><a href="javascript:void(0);" ng-click="changeState('REPONSE_POSITIVE')">Réponse positive</a></li>
+                    <li><a href="javascript:void(0);" ng-click="changeState('REPONSE_NEGATIVE')">Réponse négative</a></li>
+                    <li><a href="javascript:void(0);" ng-click="changeState('ENTRETIENS_EN_COURS')">Programmer un entretien</a></li>
+                    <li><a href="javascript:void(0);" ng-click="changeState('RECRUTEMENT_EN_COURS')">Débuter recrutement</a></li>
+                    <li><a href="javascript:void(0);" class="btn-danger" ng-click="deleteAnnonce()">Supprimer l'annonce</a></li>
+                </ul>
+              </div>
+            </div>
+    </div>
+    <div class="lettre-offre span6 pull-right">
+        <h4>Contenu de la lettre</h4>
+        <textarea rows="6" class="span6" ng-model="offre.lettre" ng-change="dirtyLetter()"></textarea>
+        <a class="btn btn-primary" ng-click="saveLettre()">Enregistrer la lettre</a>
+        <a ng-show="justSaved == true" class="btn" target="_blank" ng-href="/offres/{{offre.id}}/lettre">Télécharger la lettre</a>
+    </div>
+</div>
+
+<div class="row">
+                     <form class="form-horizontal row">
+                    
+                     <fieldset class="span6">
+                         <legend>Coordonnées</legend>
+                        <div class="control-group">
+                            
+<label class="radio inline">
+  <input type="radio" ng-model="offre.contact.sexe" value="HOMME"/>Homme</label>
+<label class="radio inline">
+  <input type="radio" ng-model="offre.contact.sexe" value="FEMME"/>Femme</label>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Nom: </label>
+                            <div class="controls">
+                                <input type="text" ng-model="offre.contact.nom"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Prénom: </label>
+                            <div class="controls">
+                                <input type="text" ng-model="offre.contact.prenom"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Téléphone: </label>
+                            <div class="controls">
+                                <input type="text" ng-model="offre.contact.telephone"/>
+                            </div>
+                        </div>
+                         
+                        <div class="control-group">
+                            <div class="controls">
+                                <a ng-click="saveContact()" class="btn btn-primary">Enregistrer</a>
+                            </div>
+                        </div>
+                     </fieldset>
+                    
+                     <fieldset class="span6">
+                        <legend>Adresse</legend>
+                        <div class="control-group">
+                            <label class="control-label">Numéro et nom de rue: </label>
+                            <div class="controls">
+                                <input type="text" ng-model="offre.contact.adresse"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Code Postal: </label>
+                            <div class="controls">
+                                <input type="text" ng-model="offre.contact.codePostal"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Ville: </label>
+                            <div class="controls">
+                                <input type="text" ng-model="offre.contact.ville"/>
+                            </div>
+                        </div>
+                     </fieldset>
+                     
+                </form>
+</div>

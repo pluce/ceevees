@@ -19,9 +19,13 @@
         <script src="@{'/public/javascripts/app/app.js'}"type="text/javascript" charset="${_response_encoding}"></script>
         
         <script src="@{'/public/javascripts/app/ctrl/HomeCtrl.js'}"type="text/javascript" charset="${_response_encoding}"></script>
+        <script src="@{'/public/javascripts/app/ctrl/CompteCtrl.js'}"type="text/javascript" charset="${_response_encoding}"></script>
+        <script src="@{'/public/javascripts/app/ctrl/DetailsOffreCtrl.js'}"type="text/javascript" charset="${_response_encoding}"></script>
         
         <script src="@{'/public/javascripts/app/services/Offres.js'}"type="text/javascript" charset="${_response_encoding}"></script> 
         <script src="@{'/public/javascripts/app/services/EtapesOffre.js'}"type="text/javascript" charset="${_response_encoding}"></script> 
+        <script src="@{'/public/javascripts/app/services/UtilisateurDetails.js'}"type="text/javascript" charset="${_response_encoding}"></script> 
+        <script src="@{'/public/javascripts/app/services/OffresContact.js'}"type="text/javascript" charset="${_response_encoding}"></script> 
         
         #{get 'moreScripts' /}
     </head>
@@ -30,6 +34,10 @@
             <div class="navbar navbar-static-top navbar-inverse">
                 <div class="navbar-inner">
                     <a class="brand" ng-href="#/">Ceevees</a>
+                    <ul class="nav">
+                        <li><a ng-href="#/">Mes Annonces</a></li>
+                        <li><a ng-href="#/compte/">Mon Compte</a></li>
+                    </ul>
                     <div class="form-logout pull-right">
                         <label>Connecter en tant que ${user}</label>
                         <a class="btn btn-mini btn-primary" href="/logout">Se déconnecter</a>

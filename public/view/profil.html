@@ -1,0 +1,57 @@
+<div class="container row">
+    <div class="span12">
+                 <form class="form-horizontal row">
+                    
+                     <fieldset class="span6">
+                         <legend>Coordonnées</legend>
+                        <div class="control-group">
+                            <label class="control-label">Votre nom: </label>
+                            <div class="controls">
+                                <input type="text" ng-model="details.nom"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Votre prénom: </label>
+                            <div class="controls">
+                                <input type="text" ng-model="details.prenom"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Téléphone: </label>
+                            <div class="controls">
+                                <input type="text" ng-model="details.telephone"/>
+                            </div>
+                        </div>
+                         
+                        <div class="control-group">
+                            <div class="controls">
+                                <a ng-click="save()" class="btn btn-primary">Enregistrer</a>
+                            </div>
+                        </div>
+                     </fieldset>
+                    
+                     <fieldset class="span6">
+                        <legend>Adresse</legend>
+                        <div class="control-group">
+                            <label class="control-label">Numéro et nom de rue: </label>
+                            <div class="controls">
+                                <input type="text" ng-model="details.adresse"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Code Postal: </label>
+                            <div class="controls">
+                                <input type="text" ng-model="details.codePostal"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Ville: </label>
+                            <div class="controls">
+                                <input type="text" ng-model="details.ville"/>
+                            </div>
+                        </div>
+                     </fieldset>
+                     
+                </form>
+    </div>
+</div>

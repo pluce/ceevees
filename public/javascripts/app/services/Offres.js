@@ -1,6 +1,6 @@
 APP.factory('Offres', function($resource) {
    var Offres = $resource('/offres/:id',
-    {}, {
+    {id:'@id'}, {
         'get':    {method:'GET'},
         'save':   {method:'POST'},
         'query':  {method:'GET', isArray:true},

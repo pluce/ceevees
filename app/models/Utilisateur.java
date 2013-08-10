@@ -5,8 +5,10 @@
 package models;
 
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -25,4 +27,7 @@ public class Utilisateur extends AbstractModel {
     
     @Temporal(TemporalType.DATE)
     public Date dateAjout;
+    
+    @OneToOne(cascade= CascadeType.ALL,orphanRemoval=true)
+    public Contact details = new Contact();
 }
