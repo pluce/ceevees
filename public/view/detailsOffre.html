@@ -32,27 +32,36 @@
               </div>
             </div>
     </div>
-    <div class="lettre-offre span6 pull-right">
-        <h4>Contenu de la lettre</h4>
-        <textarea rows="6" class="span6" ng-model="offre.lettre" ng-change="dirtyLetter()"></textarea>
-        <a class="btn btn-primary" ng-click="saveLettre()">Enregistrer la lettre</a>
-        <a ng-show="justSaved == true" class="btn" target="_blank" ng-href="/offres/{{offre.id}}/lettre">Télécharger la lettre</a>
+    <div class="lettre-offre">
+        <form class="form-horizontal well well-small">
+            <legend>Contenu de la lettre</legend>
+            <textarea rows="4" class="span6" ng-model="offre.lettre" ng-change="dirtyLetter()"></textarea>
+            <div class="control-group">
+                <div class="controls">
+                    <a class="btn btn-primary" ng-click="saveLettre()">Enregistrer la lettre</a>
+                    <a ng-show="justSaved == true" class="btn" target="_blank" ng-href="/offres/{{offre.id}}/lettre">Télécharger la lettre</a>
+                </div>
+            </div>
+          </form>
     </div>
 </div>
 
 <div class="row">
-                     <form class="form-horizontal row">
-                    
+    <div class="span12">
+                     <form class="form-horizontal well well-small">
+                         <div class="row">
                      <fieldset class="span6">
                          <legend>Coordonnées</legend>
                         <div class="control-group">
-                            
+                            <label class="control-label">Genre: </label>
+                            <div class="controls">
+                                
 <label class="radio inline">
   <input type="radio" ng-model="offre.contact.sexe" value="HOMME"/>Homme</label>
 <label class="radio inline">
   <input type="radio" ng-model="offre.contact.sexe" value="FEMME"/>Femme</label>
-                        </div>
-                        <div class="control-group">
+                            </div>
+                        </div><div class="control-group">
                             <label class="control-label">Nom: </label>
                             <div class="controls">
                                 <input type="text" ng-model="offre.contact.nom"/>
@@ -71,14 +80,9 @@
                             </div>
                         </div>
                          
-                        <div class="control-group">
-                            <div class="controls">
-                                <a ng-click="saveContact()" class="btn btn-primary">Enregistrer</a>
-                            </div>
-                        </div>
                      </fieldset>
                     
-                     <fieldset class="span6">
+                     <fieldset class="span5">
                         <legend>Adresse</legend>
                         <div class="control-group">
                             <label class="control-label">Numéro et nom de rue: </label>
@@ -99,6 +103,11 @@
                             </div>
                         </div>
                      </fieldset>
-                     
+                         </div>
+                         <div class="row">
+
+                                    <a ng-click="saveContact()" class="btn btn-primary span2 offset5">Enregistrer le contact</a>
+
+                         </div>
                 </form>
-</div>
+</div></div>

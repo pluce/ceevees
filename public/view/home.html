@@ -42,6 +42,7 @@
                 </ul>
               </div>
             </div>
+            <a ng-href="#/offre/{{o.id}}">+ de détails</a>
     </div>
 </div>
 
@@ -50,7 +51,7 @@
     <div ng-repeat="(i,o) in offres | orderBy: orderAnnonceByState | filter: filterForColumnMiddle" class="offre {{getAlertClasse(o)}}" >
             <div class="state-label">{{getStateLabel(o)}}</div>
             <p class="precisions"><b>{{o.entreprise}}</b><br/>à <b>{{o.ville}}</b></p>
-            <h4>{{o.libelle}}</h4>
+            <h4><a ng-href="#/offre/{{o.id}}">{{o.libelle}}</a></h4>
             <a ng-show="o.url.length > 0" target="_blank" href="{{o.url}}">Voir l'annonce</a>
             <a ng-hide="o.url.length > 0" target="_blank" href="javascript:void(0);"></a>
             <a ng-show="o.email.length > 0" href="mailto:{{o.email}}">Envoyer un e-mail</a> 
@@ -79,6 +80,7 @@
                 </ul>
               </div>
             </div>
+            <a ng-href="#/offre/{{o.id}}">+ de détails</a>
     </div>
 </div>
 
@@ -88,7 +90,7 @@
     <div ng-repeat="(i,o) in offres | orderBy: orderAnnonceByState | filter: filterForColumnRight" class="offre {{getAlertClasse(o)}}" >
             <div class="state-label">{{getStateLabel(o)}}</div>
             <p class="precisions"><b>{{o.entreprise}}</b><br/>à <b>{{o.ville}}</b></p>
-            <h4>{{o.libelle}}</h4>
+            <h4><a ng-href="#/offre/{{o.id}}">{{o.libelle}}</a></h4>
             <a ng-show="o.url.length > 0" target="_blank" href="{{o.url}}">Voir l'annonce</a>
             <a ng-hide="o.url.length > 0" target="_blank" href="javascript:void(0);"></a>
             <a ng-show="o.email.length > 0" href="mailto:{{o.email}}">Envoyer un e-mail</a> 
@@ -117,5 +119,6 @@
                 </ul>
               </div>
             </div>
+            <a ng-href="#/offre/{{o.id}}">+ de détails</a>
     </div>
 </div>

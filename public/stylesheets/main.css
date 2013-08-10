@@ -149,3 +149,18 @@ button,.btn,.btn-group>.btn,input,input[type="text"] {
 .form-logout a.btn {
     margin-top: 0px;
 }
+
+.lettre-offre {
+    margin: 10px 0px 0px 10px;
+    float: left;
+    width: 630px;
+}
+
+.lettre-offre form {    
+    padding: 5px;
+    height: 200px;
+}
+.lettre-offre form textarea{    
+    width: 604px;
+    margin-bottom: 10px;
+}

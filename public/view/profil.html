@@ -1,8 +1,10 @@
 <div class="container row">
+
+<div class="row">
     <div class="span12">
-                 <form class="form-horizontal row">
-                    
-                     <fieldset class="span6">
+                     <form class="form-horizontal well well-small">
+                         <div class="row">
+                     <fieldset class="span5">
                          <legend>Coordonnées</legend>
                         <div class="control-group">
                             <label class="control-label">Votre nom: </label>
@@ -23,14 +25,9 @@
                             </div>
                         </div>
                          
-                        <div class="control-group">
-                            <div class="controls">
-                                <a ng-click="save()" class="btn btn-primary">Enregistrer</a>
-                            </div>
-                        </div>
                      </fieldset>
                     
-                     <fieldset class="span6">
+                     <fieldset class="span5">
                         <legend>Adresse</legend>
                         <div class="control-group">
                             <label class="control-label">Numéro et nom de rue: </label>
@@ -51,7 +48,12 @@
                             </div>
                         </div>
                      </fieldset>
-                     
+                         </div>
+                         <div class="row">
+
+                                    <a ng-click="save()" class="btn btn-primary span2 offset5">Enregistrer le profil</a>
+
+                         </div>
                 </form>
-    </div>
+</div></div>
 </div>
