@@ -6,6 +6,7 @@ package controllers;
 
 import models.Contact;
 import models.Offre;
+import play.libs.IO;
 
 /**
  *
@@ -39,6 +40,7 @@ public class OffreRessource extends TenantedController{
     
     public static void put(String id){
         try {
+            System.out.println(IO.readContentAsString(request.body));
             Offre o = Offre.loadById(id,Offre.class);
             if(o == null) notFound();
             o = getObjectFromRequestBody(Offre.class);
